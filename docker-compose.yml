@@ -1,0 +1,43 @@
+version: "3"
+services:
+    parser-server:
+        build: ./parse-server
+        depends_on:
+          - db
+        networks:
+            - server
+        ports:
+            - "1337:1337"
+        env_file: ./parse-server.env
+    db:
+        image: mongo
+        volumes:
+            - ./data:/data/db
+        networks:
+            - server
+    dashbord:
+        build: ./dashbord
+        depends_on:
+            parse-server
+        networks:
+            - server
+        ports:
+            - "4040"
+        command: "parse-dashboard --appId nodelover --masterKey nodelover --serverURL 'http://parse-server:1337/parse' --appName Coco"
+    front:
+        image: node:9.2.0-slim
+        depends_on:
+            parse-server
+        user: "node"
+        working_dir: /home/node/app
+        volumes:
+            - ./front:/home/node/app
+        networks:
+            - server
+        ports:
+            - "8080:8080"
+            - "80:80"
+        command: "npm run dev"
+
+networks:
+    server:

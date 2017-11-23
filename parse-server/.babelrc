@@ -1,0 +1,14 @@
+{
+    "plugins": [
+        "transform-flow-strip-types"
+    ],
+    "presets": [
+        "es2015",
+        "stage-3",
+        ["env", {
+            "targets": {
+                "node": "4.6"
+            }
+        }]
+    ]
+}
