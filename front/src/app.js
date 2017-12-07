@@ -6,6 +6,18 @@ import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
 
+import AtComponents from 'at-ui'
+import 'at-ui-style/css/at.css'    // 引入组件样式
+
+import 'swiper/dist/css/swiper.css'
+if (process.BROWSER_BUILD) {
+  const VueAwesomeSwiper = require('vue-awesome-swiper/dist/ssr')
+  Vue.use(VueAwesomeSwiper)
+}
+
+
+Vue.use(AtComponents)
+
 // mixin for handling title
 Vue.mixin(titleMixin)
 
