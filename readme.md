@@ -1,5 +1,7 @@
 # coco forum
 
+cool!
+
 ## how to run
 
 1. install deps
